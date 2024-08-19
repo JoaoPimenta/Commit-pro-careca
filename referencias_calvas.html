@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .carrossel {
+            width: 80%;
+            max-width: 600px; /* Ajuste o tamanho máximo conforme necessário */
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .carrossel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 800%; /* 100% * número de imagens (8) */
+        }
+        .carrossel-item {
+            flex: 1 0 12.5%; /* 100% / número de imagens (8) */
+            box-sizing: border-box;
+        }
+        .carrossel img {
+            width: 100%; /* Ajusta a imagem para preencher o contêiner */
+            display: block;
+        }
+        .seta {
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            user-select: none;
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+        .seta-esquerda {
+            left: 10px;
+        }
+        .seta-direita {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carrossel">
+        <div class="carrossel-inner">
+            <div class="carrossel-item"><img src="referencias/imagem1.jpg" alt="Imagem 1"></div>
+            <div class="carrossel-item"><img src="referencias/imagem2.jpg" alt="Imagem 2"></div>
+            <div class="carrossel-item"><img src="referencias/imagem3.jpg" alt="Imagem 3"></div>
+            <div class="carrossel-item"><img src="referencias/imagem4.jpg" alt="Imagem 4"></div>
+            <div class="carrossel-item"><img src="referencias/imagem5.jpg" alt="Imagem 5"></div>
+            <div class="carrossel-item"><img src="referencias/imagem6.jpg" alt="Imagem 6"></div>
+            <div class="carrossel-item"><img src="referencias/imagem7.jpg" alt="Imagem 7"></div>
+            <div class="carrossel-item"><img src="referencias/imagem8.jpg" alt="Imagem 8"></div>
+        </div>
+        <div class="seta seta-esquerda" onclick="moverCarrossel(-1)">&#10094;</div>
+        <div class="seta seta-direita" onclick="moverCarrossel(1)">&#10095;</div>
+    </div>
+
+    <script>
+        let index = 0;
+
+        function moverCarrossel(direcao) {
+            const itens = document.querySelectorAll('.carrossel-item');
+            const totalItens = itens.length;
+            index = (index + direcao + totalItens) % totalItens;
+            const largura = document.querySelector('.carrossel').clientWidth;
+            document.querySelector('.carrossel-inner').style.transform = `translateX(${-index * largura}px)`;
+        }
+    </script>
+</body>
+</html>
